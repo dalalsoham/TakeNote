@@ -19,10 +19,10 @@ function Home() {
       <div className="container mx-auto">
         <div className="grid grid-cols-3 gap-4 mt-8">
           <NoteCard
-            title="Meeting on 7th May"
-            date="3rd May 2024"
-            content="Meeting on 7th May"
-            tags="#meeting"
+            title="Interview on 3rd June"
+            date="1st June 2024"
+            content="Interview Link...."
+            tags="#interview"
             isPinned={true}
             onEdit={() => {}}
             onDelete={() => {}}
@@ -51,7 +51,13 @@ function Home() {
         contentLabel=""
         className="w-[40%] max-h-3/4 bg-white rounded-md mx-auto mt-14 p-5 overflow-scroll"
       >
-        <AddEditNotes />
+        <AddEditNotes 
+        type={openAddEditModal.type}
+        noteData={openAddEditModal.data}
+          onClose={() => { 
+            setOpenAddEditModal({isShon: false, typ: "add", data: null});
+          }}
+        />
       </Modal>
     </>
   );
