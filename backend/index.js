@@ -74,7 +74,25 @@ return res.json({
 
 });
 
+//login setup
+app.post("/login", async (req, res) =>{
+    const {email, password} = req.body;
 
+    if(!email){
+        return res.status(400).json({message: "Email is required"});
+    }
+
+    if(!password){
+        return res.status(400).json({message: "Password is required"});
+    }
+
+    const userInfo = await User.findOne({email: email});
+
+    if(!usrInfo){
+        return res.status(400).json({message: "User not found"});
+    }
+    
+})
 
 app.listen(8000);
 
