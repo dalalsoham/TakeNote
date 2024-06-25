@@ -9,6 +9,7 @@ import axiosInstance from "../../utils/axiosInstance";
 import Toast from "../../components/ToastMessage/Toast";
 import EmptyCard from "../../components/EmptyCard/EmptyCard";
 import AddNotesImg from "../../assets/images/add-notes.svg";
+import NoDataImg from "../../assets/images/no-data.svg";
 // import moment from 'moment';
 
 
@@ -151,8 +152,12 @@ function Home() {
           
         </div>) : (
           <EmptyCard 
-          imgSrc={AddNotesImg} 
+          imgSrc={isSearch ? NoDataImg : AddNotesImg} 
           message={
+            isSearch 
+            ? 
+          `Oops!! No notes found.` 
+          :
           `Start creating your first note!! Click the 'Add' button to write down your thoughts, ideas and reminders. Let's start you journey with us!!`
           }/>
         )}
