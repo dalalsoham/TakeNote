@@ -6,6 +6,8 @@ import AddEditNotes from "./AddEditNotes";
 import Modal from "react-modal";
 import { useNavigate } from "react-router-dom";
 import axiosInstance from "../../utils/axiosInstance";
+// import moment from 'moment';
+
 
 function Home() {
   const [openAddEditModal, setOpenAddEditModal] = useState({
@@ -13,6 +15,8 @@ function Home() {
     type: "add",
     data: null,
   });
+
+  const [allNotes, setAllNotes] = useState([]);
 
   const [userInfo, setUserInfo] = useState(null);
 
@@ -37,7 +41,21 @@ function Home() {
     }
   };
 
+  //get all notes
+  const getAllNotes = async() => {
+    try{
+      const response = await axiosInstance.get("/get-all-notes");
+
+      if(response.data && response.data.notes) {
+        setAllNotes(response.data.notes);
+      }
+    }catch(error){
+      console.log("An unexpected error occurred. Please try again.");
+    }
+  }
+
   useEffect(() => {
+    getAllNotes();
     getUserInfo();
   
     // return () => {
@@ -52,16 +70,20 @@ function Home() {
 
       <div className="container mx-auto">
         <div className="grid grid-cols-3 gap-4 mt-8">
+        {allNotes.map((item, index) =>(
           <NoteCard
-            title="Interview on 3rd June"
-            date="1st June 2024"
-            content="Interview Link...."
-            tags="#interview"
-            isPinned={true}
+          key={item._id}
+            title={item.title}
+            date={item.createdOn}
+            content={item.content}
+            tags={item.tags}
+            isPinned={item.isPinned}
             onEdit={() => {}}
             onDelete={() => {}}
             onPinNote={() => {}}
           />
+        ))}
+          
         </div>
       </div>
 
