@@ -6,5 +6,8 @@ export default defineConfig({
   plugins: [react()],
   build: {
     outDir: 'dist'
+  },
+  define: {
+    __APP_ENV__: process.env.VITE_VERCEL_ENV,
   }
 })
