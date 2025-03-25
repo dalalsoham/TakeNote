@@ -8,7 +8,8 @@
     "build": "npm run generate-html && vite build",
     "generate-html": "mkdir -p dist && cp index.html dist/",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "start": "vite preview"
   },
   "dependencies": {
     "axios": "^1.7.2",
